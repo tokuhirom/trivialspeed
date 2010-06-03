@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Cannot listen: %s:%d\n", conf_addr.c_str(), conf_port);
         exit(1);
     }
-    // evhttp_set_timeout(httpd, conf_timeout);
+    evhttp_set_timeout(httpd, conf_timeout);
     evhttp_set_gencb(httpd, main_request_handler, &ctx);
     event_dispatch();
     evhttp_free(httpd);
