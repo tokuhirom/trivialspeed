@@ -1,6 +1,6 @@
-#include <cstdio>
+#include <stdio.h>
 #include <unistd.h>
-#include <cassert>
+#include <assert.h>
 #include <memory>
 #include <string>
 
@@ -8,8 +8,6 @@
 #include <evhttp.h>
 
 const char* TRIVIALSPEED_VERSION = "0.01";
-
-using namespace std;
 
 struct ts_ctx {
     kyotocabinet::HashDB db;
