@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
     event_init();
     struct evhttp *httpd = evhttp_start(conf_addr.c_str(), conf_port);
     if (!httpd) {
-        fprintf(stderr, "Cannot listen: %s:%d\n", conf_addr.c_str(), conf_port);
+        fprintf(stderr, "Cannot bind port: %s:%d\n", conf_addr.c_str(), conf_port);
         exit(1);
     }
     evhttp_set_timeout(httpd, conf_timeout);
@@ -115,5 +115,7 @@ int main(int argc, char **argv) {
 
     // after use
     ctx.db.close();
+
+    return 0;
 }
 
