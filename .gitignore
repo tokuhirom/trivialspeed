@@ -1,0 +1,4 @@
+*.o
+*.kch
+trivialspeed
+.sconsign.dblite
