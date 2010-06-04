@@ -56,6 +56,8 @@ static void usage() {
     printf("  -a addr\n");
     printf("  -p port\n");
     printf("  -t timeout in seconds\n");
+    printf("  -v print version\n");
+    printf("  -h show this help\n");
 }
 
 int main(int argc, char **argv) {
@@ -68,7 +70,7 @@ int main(int argc, char **argv) {
     struct ts_ctx ctx;
 
     char ch;
-    while ((ch = getopt(argc, argv, "a:p:t:m:")) != -1) {
+    while ((ch = getopt(argc, argv, "a:p:t:m:vh")) != -1) {
         switch (ch) {
         case 'a':
             conf_addr = optarg;
@@ -81,6 +83,14 @@ int main(int argc, char **argv) {
             break;
         case 'm':
             ctx.mimetype = optarg;
+            break;
+        case 'v':
+            printf("trivialspeed %s(libevent %s, kyotocabinet %s)\n", TRIVIALSPEED_VERSION, event_get_version(), kyotocabinet::VERSION);
+            exit(1);
+            break;
+        case 'h':
+            usage();
+            exit(1);
             break;
         default:
             usage();
@@ -96,8 +106,6 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Cannot open database: %s\n", conf_db.c_str());
         exit(1);
     }
-
-    printf("trivialspeed %s(libevent %s)\n", TRIVIALSPEED_VERSION, event_get_version());
 
     // main loop
     event_init();
